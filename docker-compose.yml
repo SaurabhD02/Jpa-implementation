@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8
+    container_name: mysql_db_docker
+    ports:
+    - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: Saurabhdorle@Mysql20598
+      MYSQL_DATABASE: jpademo
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+
+  springboot:
+    build: .
+    container_name: jpademo_project
+    environment:
+      MYSQL_HOST: localhost
+      MYSQL_PORT: 3306
+      MYSQL_DB: jpademo
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: saurabhdorle@Mysql20598
+    ports:
+      - "8081:8080"  
+    depends_on:
+      - mysql      
+
